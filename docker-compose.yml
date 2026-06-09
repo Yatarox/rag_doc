@@ -1,0 +1,20 @@
+services:
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/chroma:/chroma/chroma
+    environment:
+      - ALLOW_RESET=true
+
+  api:
+    build: ./api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./docs:/app/docs
+    env_file:
+      - .env
+    depends_on:
+      - chromadb
