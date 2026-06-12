@@ -21,5 +21,8 @@ class chromaDB_conn:
             query_embeddings=[query_embedding],
             n_results=top_k
         )
-        return results
+        return [meta['text'] for meta in results['metadatas'][0]]
     
+    def delete_collection(self):
+        self.chroma_client.delete_collection("rag_doc")
+        self.collection = self.chroma_client.get_or_create_collection(name="rag_doc")

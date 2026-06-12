@@ -2,7 +2,7 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from api.ingest import Ingestor
+from ingest import Ingestor
 
 ingestor = Ingestor()
 ingestor.ingest_init()
